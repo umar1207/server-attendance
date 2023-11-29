@@ -1,0 +1,41 @@
+{% extends 'attendance/basic.html' %}
+
+{% block title %}Attendance Home{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid text-center" style="margin-top: 40px;">
+    <br>
+    <h1 style="color: rgb(6, 10, 238); text-align: center;">ATTENDANCE</h1>
+    <br>
+    <table class="table">
+        <thead class="thead-light">
+            <TR>
+                <TH>Name</TH>
+                <TH>CardID</TH>
+                <TH>Team</TH>
+                <TH>Date</TH>
+                <TH>Time In</TH>
+                <TH>Time Out</TH>
+            </TR>
+        </thead>
+        <tbody id="attendance" class="attendance">
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+{% block js %}
+
+<script>
+    $(document).ready(function(){
+        setInterval(function(){
+            $.ajax({
+                url : "{% url 'index1' %}"
+                // error here  
+            }).done(function(data){
+                $('#attendance').html(data);
+            });
+        }, 20);
+    })
+</script>
+{% endblock %}
